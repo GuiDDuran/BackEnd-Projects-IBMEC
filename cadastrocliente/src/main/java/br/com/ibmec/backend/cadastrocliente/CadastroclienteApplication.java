@@ -1,14 +1,14 @@
-package com.helloworld.spring.helloworld;
+package br.com.ibmec.backend.cadastrocliente;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HelloworldApplication {
+public class CadastroclienteApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(HelloworldApplication.class, args);
+		SpringApplication.run(CadastroclienteApplication.class, args);
 	}
 
 }
