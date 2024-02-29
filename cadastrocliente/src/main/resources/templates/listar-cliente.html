@@ -3,21 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Listar Cliente</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
 <h1>Página de listar cliente.</h1>
+
+<a href="/cliente/adicionar">Criar novo cliente</a>
+
 <table>
     <tr>
+        <th>Id</th>
         <th>Nome</th>
         <th>Email</th>
         <th>CPF</th>
         <th>Data de Nascimento</th>
+        <th>Ações</th>
     </tr>
     <tr th:each="cliente: ${listaCliente}"> <!-- Para cada cliente da lista cliente será impresso os parâmetros na tabela -->
+        <td th:text="${cliente.id}"></td>
         <td th:text="${cliente.nome}"></td>
         <td th:text="${cliente.email}"></td>
         <td th:text="${cliente.cpf}"></td>
         <td th:text="${cliente.dataNascimento}"></td>
+        <td>
+            <a th:href="@{/cliente/excluir/{id}(id=${cliente.id})}">Excluir</a>
+            <a th:href="@{/cliente/editar/{id}(id=${cliente.id})}">Editar</a>
+        </td>
     </tr>
 </table>
 </body>
