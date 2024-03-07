@@ -1,8 +1,10 @@
 package br.com.ibmec.backend.cadastrocliente.controller;
 
 import br.com.ibmec.backend.cadastrocliente.model.Cliente;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,7 +37,11 @@ public class ClienteController {
     }
 
     @PostMapping("/salvar")  // O método Post é utilizado para salvar.
-    public String salvar(Cliente cliente) {
+    public String salvar(@Valid Cliente cliente, BindingResult result) {
+        if (result.hasErrors()){
+            return "adicionar-cliente";
+        }
+
         int id = 1;
         if (repositorio.size() > 0) {
             Cliente ultimo = repositorio.get(repositorio.size() - 1);
@@ -61,16 +67,40 @@ public class ClienteController {
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable("id") int id, Model model) {
-        Cliente cliente = repositorio.stream()
+        Cliente clienteASerEditado = null;
+        for (Cliente item : repositorio) {
+            if (item.getId() == id){
+                clienteASerEditado = item;
+                break;
+            }
+        }
+        model.addAttribute("cliente", clienteASerEditado);
+        return "editar-cliente";
+
+        /*Cliente cliente = repositorio.stream()
                 .filter(c -> c.getId() == id)
                 .findFirst()
                 .orElse(null);
         model.addAttribute("cliente", cliente);
-        return "editar-cliente";
+        return "editar-cliente"; */
     }
 
-    @PostMapping("/salvar/{id}")
-    public String salvarEdicao(@PathVariable("id") int id, @ModelAttribute("cliente") Cliente cliente) {
+    @PostMapping("/atualizar/{id}")
+    public String atualizar(@PathVariable("id") int id, Cliente newData) {
+        Cliente clienteASerEditado = null;
+        for (Cliente item : repositorio) {
+            if (item.getId() == id) {
+                clienteASerEditado = item;
+                break;
+            }
+        }
+        clienteASerEditado.setNome(newData.getNome());
+        clienteASerEditado.setCpf(newData.getCpf());
+        clienteASerEditado.setEmail(newData.getEmail());
+        clienteASerEditado.setDataNascimento(newData.getDataNascimento());
+        return "redirect:/cliente/listar";
+    }
+    /*public String atualizar(@PathVariable("id") int id, @ModelAttribute("cliente") Cliente cliente) {
         for (int i = 0; i < repositorio.size(); i++) {
             if (repositorio.get(i).getId() == id) {
                 repositorio.set(i, cliente);
@@ -78,6 +108,5 @@ public class ClienteController {
             }
         }
         return "redirect:/cliente/listar";
-    }
-
+    } */
 }
