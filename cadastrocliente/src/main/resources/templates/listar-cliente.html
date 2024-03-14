@@ -1,38 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Listar Cliente</title>
-    <style>
-        h1 {
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #ddd;
-        }
-    </style>
-</head>
+<head th:replace="~{header::header}"></head>
 <body>
 <h1>Página de listar cliente</h1>
 
-<a href="/cliente/adicionar">Criar novo cliente</a>
+<div class="d-grid gap-2">
+    <a class="btn btn-primary" href="/cliente/adicionar">Criar novo cliente</a>
+</div>
 
-<table>
+<table class="table table-striped">
     <tr>
         <th>Id</th>
         <th>Nome</th>
@@ -48,8 +24,8 @@
         <td th:text="${cliente.cpf}"></td>
         <td th:text="${cliente.dataNascimento}"></td>
         <td>
-            <a th:href="@{/cliente/excluir/{id}(id=${cliente.id})}">Excluir</a>
-            <a th:href="@{/cliente/editar/{id}(id=${cliente.id})}">Editar</a>
+            <a class="btn btn-primary" th:href="@{/cliente/excluir/{id}(id=${cliente.id})}">Excluir</a>
+            <a class="btn btn-primary" th:href="@{/cliente/editar/{id}(id=${cliente.id})}">Editar</a>
         </td>
     </tr>
 </table>

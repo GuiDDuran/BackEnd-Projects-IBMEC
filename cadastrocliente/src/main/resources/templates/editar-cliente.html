@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Cliente</title>
-</head>
+<head th:replace="~{header::header}"></head>
 <body>
 <h1>Página de editar cliente</h1>
 <form action="#" th:action="@{/cliente/atualizar/{id}(id=${cliente.id})}" th:object="${cliente}" method="post">
-    <label>Nome</label>
-    <input type="text" th:field="*{nome}" id="nome">
+    <div class="input-group mb-3">
+        <span class="input-group-text">Nome</span>
+        <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" th:field="*{nome}" id="nome">
+    </div>
 
-    <label>Email</label>
-    <input type="text" th:field="*{email}" id="email">
+    <div class="input-group mb-3">
+        <span class="input-group-text">Email</span>
+        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" th:field="*{email}" id="email">
+    </div>
 
-    <label>CPF</label>
-    <input type="text" th:field="*{cpf}" id="cpf">
+    <div class="input-group mb-3">
+        <span class="input-group-text">CPF</span>
+        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" th:field="*{cpf}" id="cpf">
+    </div>
 
-    <label>Data de nascimento</label>
-    <input type="text" th:field="*{dataNascimento}" id="dataNascimento">
+    <div class="input-group mb-3">
+        <span class="input-group-text">Data de nascimento</span>
+        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" th:field="*{dataNascimento}" id="dataNascimento">
+    </div>
 
-    <input type="submit" value="Editar Cliente">
+    <input class="btn btn-primary" type="submit" value="Editar Cliente">
 </form>
 </body>
 </html>
