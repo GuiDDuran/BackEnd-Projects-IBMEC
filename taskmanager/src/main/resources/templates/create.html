@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{header::header}"></head>
+<body>
+<h1>Página de adicionar tarefa</h1>
+<form action="#" th:action="@{/task/save}" th:object="${task}" method="post">
+    <div class="input-group mb-3">
+        <span class="input-group-text">Nome</span>
+        <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" th:field="*{name}" id="name">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Responsável</span>
+        <input type="text" class="form-control" placeholder="Responsável" aria-label="Responsável" aria-describedby="basic-addon1" th:field="*{owner}" id="owner">
+        <span th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}"></span>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Descrição</span>
+        <input type="text" class="form-control" placeholder="Descrição" aria-label="Descrição" aria-describedby="basic-addon1" th:field="*{description}" id="description">
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Criar Tarefa">
+</form>
+</body>
+</html>
